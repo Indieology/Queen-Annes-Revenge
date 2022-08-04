@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/S_Fire_Throwing_Hit_3.wav-2f48cd5846cd1309eb3e400c96e5e3b9.sample"
+
+[deps]
+
+source_file="res://Sounds/Explosion/S_Fire_Throwing_Hit_3.wav"
+dest_files=[ "res://.import/S_Fire_Throwing_Hit_3.wav-2f48cd5846cd1309eb3e400c96e5e3b9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

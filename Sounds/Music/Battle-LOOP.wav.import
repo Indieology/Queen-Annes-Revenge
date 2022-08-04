@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Battle-LOOP.wav-1fd8ada28c85d11b96f6a5bf1c9ccd01.sample"
+
+[deps]
+
+source_file="res://Sounds/Music/Battle-LOOP.wav"
+dest_files=[ "res://.import/Battle-LOOP.wav-1fd8ada28c85d11b96f6a5bf1c9ccd01.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Enemies/Cannon.gd" type="Script" id=1]
+[ext_resource path="res://Kenney Pirate Pixel Art/cannon.png" type="Texture" id=2]
+[ext_resource path="res://Player/GunLocation.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.0
+height = 6.0
+
+[node name="CannonRight" type="Area2D"]
+scale = Vector2( 1.2, 1.2 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 2 )
+
+[node name="DelayTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="FiringPosition" type="Node2D" parent="."]
+position = Vector2( 7, 0 )
+script = ExtResource( 3 )
+shoot_direction = Vector2( 1, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 1.5708
+shape = SubResource( 1 )
