@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pirate-music-14288.mp3-9afefbea02eff2ffe05ea82325e87b90.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Music/pirate-music-14288.mp3"
+dest_files=[ "res://.import/pirate-music-14288.mp3-9afefbea02eff2ffe05ea82325e87b90.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

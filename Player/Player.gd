@@ -100,7 +100,7 @@ func _physics_process(delta):
 			#tilemaps.decrease_scroll_speed(original_scroll_speed)
 			tilemaps.scroll_speed = original_scroll_speed
 		
-	print(tilemaps.scroll_speed)
+	#print(tilemaps.scroll_speed)
 	if direction.length() > 1:
 		direction = direction.normalized()
 	
@@ -110,10 +110,9 @@ func _physics_process(delta):
 		move_and_slide(velocity)
 	
 	position.x = clamp(position.x, camera.position.x - 290, camera.position.x + 290) 
-	
+	position.y = clamp(position.y, camera.position.y - 100, camera.position.y + 650)
 	if position.y > 620:
-		print("died!")
-		queue_free()
+		kill_player()
 	
 
 func damage(amount: int):
@@ -123,12 +122,17 @@ func damage(amount: int):
 	invincibilityAnimation.play("Flash")
 	health -= amount
 	get_parent().get_node("HUD").update_health(health)
+	$HurtAnimation.play("hurt")
+	$HurtSound.play(.2)
+	get_parent().get_node("Camera2D").add_trauma(.4)
 	if health <= 0:
 		queue_free()
 
 func increase_score(score: int):
 	var current_score = get_parent().get_node("HUD/Label").text.to_int()
 	current_score += score
+	Leaderboard.set_player_score(current_score)
+	get_parent().get_node("GameOver/WindowDialog/ScoreContainer/Score2").text = str(current_score)
 	get_parent().get_node("HUD/Label").text = str(current_score)
 	get_parent().get_node("HUD/Label/AnimationPlayer").play("Increase Score")
 	
@@ -149,5 +153,10 @@ func shoot_delay():
 	
 
 func _on_VisibilityNotifier2D_screen_exited():
+	kill_player()
+
+func kill_player():
+	tilemaps.decrease_scroll_speed()
+	get_parent().get_node("GameOver/WindowDialog").show()
 	print("died!")
 	queue_free()

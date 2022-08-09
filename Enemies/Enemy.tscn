@@ -16,12 +16,12 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=8]
-radius = 5.33329
-height = 24.6667
+radius = 8.0
+height = 10.0
 
 [sub_resource type="CapsuleShape2D" id=7]
-radius = 8.66662
-height = 26.0001
+radius = 11.0
+height = 12.0
 
 [node name="Enemy" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -35,9 +35,7 @@ texture = ExtResource( 6 )
 frames = SubResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -2 )
-rotation = 1.5708
 shape = SubResource( 8 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -45,7 +43,6 @@ shape = SubResource( 8 )
 [node name="HurtboxShape" type="CollisionShape2D" parent="Hurtbox"]
 visible = false
 position = Vector2( 0, -2 )
-rotation = 1.5708
 shape = SubResource( 7 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

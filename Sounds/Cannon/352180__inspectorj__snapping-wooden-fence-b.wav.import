@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/352180__inspectorj__snapping-wooden-fence-b.wav-f23b23cd322074a0c16e26f83df06e0b.sample"
+
+[deps]
+
+source_file="res://Sounds/Cannon/352180__inspectorj__snapping-wooden-fence-b.wav"
+dest_files=[ "res://.import/352180__inspectorj__snapping-wooden-fence-b.wav-f23b23cd322074a0c16e26f83df06e0b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

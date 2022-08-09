@@ -15,10 +15,10 @@ func _physics_process(delta):
 
 
 func _on_Bullet_area_entered(area):
-	if area.get_parent().is_in_group("damageable") and bulletLifetime.time_left < 1:
+	if area.get_parent().is_in_group("damageable") and bulletLifetime.time_left < 1.05:
 		area.get_parent().damage(1)
 		queue_free()
 		
-	elif area.is_in_group("damageable") and bulletLifetime.time_left < 1:
+	elif area.is_in_group("damageable") and bulletLifetime.time_left < 1.05:
 			area.damage(1)
 			queue_free()

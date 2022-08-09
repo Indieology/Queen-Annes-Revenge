@@ -19,6 +19,8 @@ onready var bullet := preload("res://Projectiles/Bullet.tscn")
 #reference to the airplane node above, to check if it is still in scene
 onready var wr = weakref(player)
 
+var is_active = true
+
 func _ready():
 	#add_to_group("damageable")
 	randomize()
@@ -34,20 +36,18 @@ func _process(delta):
 func _physics_process(delta):
 	add_to_group("damageable")
 	#position.y += verticalSpeed * delta
-	if fireTimer.is_stopped() and global_position.y > 0:
+	if fireTimer.is_stopped() and global_position.y > 0 and is_active:
 		fire()
 		randomize()
 		fireTimer.wait_time = rand_range(1,6)
 		fireTimer.start()
 
 func _on_Hurtbox_area_entered(area):
-	var this_hurt_effect = hurt_effect.instance()
-	get_parent().add_child(this_hurt_effect)
-	this_hurt_effect.position = area.global_position
-	if area.get_parent() is Player:
-		area.get_parent().damage(2)
-		damage(health)
-		#move hurt effect position to show collision between the two objects?
+	if is_active:
+		if area.get_parent() is Player:
+			area.get_parent().damage(2)
+			damage(health)
+			#move hurt effect position to show collision between the two objects?
 		
 	
 func damage(amount: int):
@@ -62,7 +62,12 @@ func damage(amount: int):
 		else:
 			player.increase_score(score)
 			player.increase_energy(energy_dropped)
-		queue_free()
+		#queue_free()
+		visible = false
+		is_active = false
+		$Hurtbox.set_deferred("monitorable", false) 
+		$CollisionShape2D.set_deferred("disabled", true)
+		
 
 func fire():
 	for child in guns.get_children():
@@ -72,4 +77,6 @@ func fire():
 			this_bullet.direction = child.shoot_direction
 
 func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+	visible = false
+	is_active = false
+	set_deferred("monitorable", false) 

@@ -17,6 +17,8 @@ onready var bullet := preload("res://Projectiles/Bullet.tscn")
 
 onready var wr = weakref(player)
 
+var is_active = true
+
 func _ready():
 	#add_to_group("damageable")
 	randomize()
@@ -25,16 +27,13 @@ func _ready():
 
 func _physics_process(delta):
 	add_to_group("damageable")
-	if delay_timer.is_stopped() and global_position.y > 0:
+	if delay_timer.is_stopped() and global_position.y > 0 and is_active == true:
 		fire()
 		randomize()
 		delay_timer.wait_time = rand_range(1,4)
 		delay_timer.start()
 
 func _on_Hurtbox_area_entered(area):
-	var this_hurt_effect = hurt_effect.instance()
-	get_parent().add_child(this_hurt_effect)
-	this_hurt_effect.position = area.global_position
 	if area.get_parent() is Player:
 		area.get_parent().damage(2)
 		damage(health)
@@ -54,8 +53,11 @@ func damage(amount: int):
 		else:
 			player.increase_score(score)
 			player.increase_energy(energy_dropped)
-		queue_free()
-
+		#queue_free()
+		visible = false
+		is_active = false
+		set_deferred("monitorable", false) 
+		
 func fire():
 	var this_bullet := bullet.instance()
 	get_parent().get_parent().get_parent().add_child(this_bullet)
@@ -63,4 +65,6 @@ func fire():
 	this_bullet.direction = gun.shoot_direction
 
 func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+	visible = false
+	is_active = false
+	set_deferred("monitorable", false) 

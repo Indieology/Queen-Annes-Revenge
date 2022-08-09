@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://GameWorld/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/Minecraft.ttf" type="DynamicFontData" id=2]
@@ -42,6 +42,9 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 32 ]
 }
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 2 )
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -87,3 +90,15 @@ texture_over = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 
 [node name="TweenHUD" type="Tween" parent="."]
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -83.0
+margin_top = -20.0
+custom_fonts/font = SubResource( 6 )
+text = "Restart"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

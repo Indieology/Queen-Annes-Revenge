@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Kenney Pirate Pixel Art/pirate_ship_1.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
-[ext_resource path="res://Sounds/Laser/laser-shot.wav" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/Cannon/184650__isaac200000__cannon1.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sounds/Cannon/352180__inspectorj__snapping-wooden-fence-b.wav" type="AudioStream" id=4]
 [ext_resource path="res://Player/GunLocation.gd" type="Script" id=5]
 [ext_resource path="res://HUD/circle.png" type="Texture" id=6]
 [ext_resource path="res://Player/shadow.png" type="Texture" id=7]
@@ -44,6 +45,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -173,6 +186,23 @@ step = 0.025
 [sub_resource type="Animation" id=9]
 length = 0.001
 
+[sub_resource type="Animation" id=15]
+resource_name = "hurt"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 0.027451, 0.027451, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 320, 512 )
 scale = Vector2( 1.2, 1.2 )
@@ -263,14 +293,23 @@ anims/Flash = SubResource( 8 )
 anims/RESET = SubResource( 9 )
 
 [node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -25.0
+pitch_scale = 0.7
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -35.0
 pitch_scale = 0.7
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
 position = Vector2( 0.416653, 1.25 )
 scale = Vector2( 1.70833, 2.79167 )
 
 [node name="MovementTween" type="Tween" parent="."]
+
+[node name="HurtAnimation" type="AnimationPlayer" parent="."]
+anims/hurt = SubResource( 15 )
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
